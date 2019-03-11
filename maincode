@@ -1,0 +1,38 @@
+int Time, set = 0;
+int h, m, s, H, M, S;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(4, INPUT);
+  pinMode(8, OUTPUT);
+}
+
+void loop() {                   
+  if (set == 0) {
+    Serial.println("Please set the time");
+    setTime = Serial.parseInt();
+    H = set / 10000;
+    set = set % 10000;
+    M = set / 100;
+    S = set % 100;
+  }
+  Time = millis() / 1000;
+  h = Time / 3600;
+  Time = Time % 3600;
+  m = Time / 60;
+  s = Time % 60;
+  Serial.print("Times: ");
+  Serial.print(h);
+  Serial.print(":");
+  Serial.print(m);
+  Serial.print(":");
+  Serial.println(s);
+  delay(1000);
+  if (H == h, M == m, S == s) {
+    tone(8, 500);
+  }
+  if (digitalRead(4) == HIGH) {
+    noTone(8);
+  }
+}
+
